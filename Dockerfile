@@ -1,4 +1,4 @@
-# Этап сборки (выберите версию SDK, соответствующую вашему проекту, например 8.0 или 9.0)
+# Этап сборки (используем .NET 8 SDK для компиляции)
 FROM ://microsoft.com AS build
 WORKDIR /src
 
@@ -15,8 +15,7 @@ FROM ://microsoft.com AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Render динамически назначает порт через переменную среды PORT. 
-# Говорим ASP.NET слушать этот порт.
+# Настройка порта для Render
 ENV ASPNETCORE_URLS=http://+:10000
 
 ENTRYPOINT ["dotnet", "MarkdownEditor.dll"]
