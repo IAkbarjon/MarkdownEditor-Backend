@@ -1,5 +1,5 @@
-# Этап сборки (используем .NET 8 SDK для компиляции)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Этап сборки (используем .NET 10 SDK)
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Копируем csproj и восстанавливаем зависимости
@@ -10,8 +10,8 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o /app/out
 
-# Этап запуска (используем легковесный runtime)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+# Этап запуска (используем .NET 10 runtime)
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
