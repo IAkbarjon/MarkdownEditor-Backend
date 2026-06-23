@@ -1,0 +1,6 @@
+@MarkdownEditor_HostAddress = http://localhost:5160
+
+GET {{MarkdownEditor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
